@@ -49,19 +49,13 @@ const TodoList = ({
     }
   }, [todoData, filterType]);
 
-  const handleFilter = (
-    event: React.MouseEvent<HTMLElement>,
-    newFilter: string
-  ) => {
+  const handleFilter = (_: unknown, newFilter: string) => {
     if (newFilter !== null) {
       setFilterType(newFilter);
     }
   };
 
-  const handleOrder = (
-    event: React.MouseEvent<HTMLElement>,
-    newOrder: string
-  ) => {
+  const handleOrder = (_: unknown, newOrder: string) => {
     setOrder(newOrder);
   };
 
@@ -161,7 +155,7 @@ const TodoList = ({
                 >
                   <IconButton onClick={() => toggleTodo(todo.id)}>
                     {todo.completed ? (
-                      <TaskAltRoundedIcon sx={{ color: '#42a5f5'}}/>
+                      <TaskAltRoundedIcon sx={{ color: "#42a5f5" }} />
                     ) : (
                       <RadioButtonUncheckedRoundedIcon />
                     )}
