@@ -154,7 +154,7 @@ const TodoList = ({
               </ListItemText>
             </ListItem>
           )}
-          {filteredTodos.map((todo, index) => {
+          {filteredTodos.map((todo) => {
             return (
               <ListItem key={todo.id}>
                 <Stack
