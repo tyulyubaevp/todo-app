@@ -38,8 +38,19 @@ const TodoList = ({
       result = result.filter((todo) => !todo.completed);
     }
 
+    result.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+
+      if (order === "to-new") {
+        return dateB.getTime() - dateA.getTime();
+      } else {
+        return dateA.getTime() - dateB.getTime();
+      }
+    });
+
     return result;
-  }, [todoData, filterType]);
+  }, [todoData, filterType, order]);
 
   useEffect(() => {
     if (todoData.length > 0 && filterType === "") {
@@ -55,8 +66,8 @@ const TodoList = ({
     }
   };
 
-  const handleOrder = (_: unknown, newOrder: string) => {
-    setOrder(newOrder);
+  const handleOrder = () => {
+    setOrder((prev) => (prev === "to-old" ? "to-new" : "to-old"));
   };
 
   const toggleButtonStyles = {
@@ -101,7 +112,7 @@ const TodoList = ({
             size="large"
             exclusive
             value={order}
-            onChange={handleOrder}
+            onClick={handleOrder}
             disabled={todoData.length ? false : true}
           >
             <ToggleButton
