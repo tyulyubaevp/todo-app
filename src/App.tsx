@@ -87,6 +87,7 @@ function App() {
           margin: "0 auto",
           paddingTop: "25px",
         }}
+        padding='10px'
       >
         <Stack
           direction="row"

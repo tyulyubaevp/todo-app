@@ -30,14 +30,15 @@ const EditTodo = ({
 
   return (
     <>
-      <Modal open={modal} onClose={closeModal}>
+      <Modal open={modal} onClose={closeModal} sx={{ p: { xs: 2, sm: 0 } }}>
         <Box
           sx={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
+            maxWidth: 400,
+            width: "100%",
             bgcolor: "#fff",
             borderRadius: "20px",
             p: 2,
