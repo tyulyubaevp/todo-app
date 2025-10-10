@@ -174,6 +174,8 @@ const TodoList = ({
                   <Tooltip
                     title={todo.title}
                     placement="bottom-start"
+                    enterTouchDelay={0}
+                    leaveTouchDelay={3000}
                     slotProps={{
                       popper: {
                         modifiers: [
