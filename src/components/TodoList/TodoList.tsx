@@ -159,7 +159,6 @@ const TodoList = ({
               <ListItem key={todo.id}>
                 <Stack
                   direction="row"
-                  justifyContent="space-between"
                   alignItems="center"
                   width="100%"
                   spacing={1}
@@ -195,7 +194,9 @@ const TodoList = ({
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
-                        maxWidth: "400px",
+                        maxWidth: "330px",
+                        width: "100%",
+                        flex: 10,
                       }}
                       slotProps={{
                         primary: {

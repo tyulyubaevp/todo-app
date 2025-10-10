@@ -100,7 +100,7 @@ function App() {
             variant="h1"
             component="h1"
             color="#fff"
-            sx={{ fontSize: { xs: "54px" } }}
+            sx={{ fontSize: { xs: "44px" } }}
           >
             Todo App
           </Typography>
