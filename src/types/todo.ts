@@ -1,0 +1,21 @@
+export interface ITodo {
+  id: string;
+  date: string;
+  title: string;
+  completed: boolean;
+}
+
+export interface ITodoListProps {
+  todoData: ITodo[];
+  deleteTodo: (id: string) => void;
+  editTodo: (id: string, title: string) => void;
+  toggleTodo: (id: string) => void;
+}
+
+export interface IEditTodoProps {
+  modal: boolean;
+  closeModal: () => void;
+  editTitle: string;
+  setEditTitle: (value: string) => void;
+  saveEditing: () => void;
+}
