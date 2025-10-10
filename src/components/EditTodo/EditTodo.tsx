@@ -30,19 +30,19 @@ const EditTodo = ({
 
   return (
     <>
-      <Modal open={modal} onClose={closeModal} sx={{ p: { xs: 2, sm: 0 } }}>
+      <Modal open={modal} onClose={closeModal}>
         <Box
           sx={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            maxWidth: 400,
+            maxWidth: "400px",
             width: "100%",
             bgcolor: "#fff",
             borderRadius: "20px",
             p: 2,
-            boxShadow: "10px 10px 0px grey",
+            boxShadow: "10px 10px 0px #00000089",
           }}
           component="form"
           onSubmit={handleSubmit}
@@ -55,7 +55,12 @@ const EditTodo = ({
               width="100%"
               spacing={1}
             >
-              <Typography variant="h4" component="h2" color="grey">
+              <Typography
+                variant="h4"
+                component="h2"
+                color="#00000089"
+                sx={{ fontSize: { xs: "24px" } }}
+              >
                 Редактировать
               </Typography>
               <IconButton onClick={closeModal}>
@@ -70,7 +75,7 @@ const EditTodo = ({
               spacing={1}
             >
               <TextField
-                sx={{ width: "100%", paddingTop: "5px" }}
+                sx={{ width: "100%" }}
                 variant="filled"
                 size="small"
                 hiddenLabel

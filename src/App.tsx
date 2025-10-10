@@ -87,7 +87,7 @@ function App() {
           margin: "0 auto",
           paddingTop: "25px",
         }}
-        padding='10px'
+        padding="10px"
       >
         <Stack
           direction="row"
@@ -96,7 +96,12 @@ function App() {
           width="100%"
           spacing={1}
         >
-          <Typography variant="h1" component="h1" color="#fff">
+          <Typography
+            variant="h1"
+            component="h1"
+            color="#fff"
+            sx={{ fontSize: { xs: "54px" } }}
+          >
             Todo App
           </Typography>
           <IconButton onClick={toggleDarkMode}>

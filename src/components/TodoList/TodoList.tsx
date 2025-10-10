@@ -188,7 +188,7 @@ const TodoList = ({
                     }}
                   >
                     <ListItemText
-                      primary={`${index + 1}. ${todo.title}`}
+                      primary={`${todo.title}`}
                       sx={{
                         overflow: "hidden",
                         textOverflow: "ellipsis",
