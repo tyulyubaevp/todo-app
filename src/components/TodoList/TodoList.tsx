@@ -4,15 +4,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  IconButton,
   ToggleButton,
   ToggleButtonGroup,
-  Typography,
 } from "@mui/material";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
-import TaskAltRoundedIcon from "@mui/icons-material/TaskAltRounded";
 import QueryBuilderRoundedIcon from "@mui/icons-material/QueryBuilderRounded";
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import SubjectRoundedIcon from "@mui/icons-material/SubjectRounded";
@@ -20,6 +14,7 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import type { ITodoListProps } from "../../types/todo";
 import { useEffect, useMemo, useState } from "react";
 import type { Theme } from "@mui/material/styles";
+import TodoItem from "../TodoItem/TodoItem";
 
 const TodoList = ({
   todoData,
@@ -154,49 +149,15 @@ const TodoList = ({
               </ListItemText>
             </ListItem>
           )}
-          {filteredTodos.map((todo) => {
-            return (
-              <ListItem key={todo.id}>
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  width="100%"
-                  spacing={1}
-                >
-                  <IconButton onClick={() => toggleTodo(todo.id)}>
-                    {todo.completed ? (
-                      <TaskAltRoundedIcon sx={{ color: "#42a5f5" }} />
-                    ) : (
-                      <RadioButtonUncheckedRoundedIcon />
-                    )}
-                  </IconButton>
-                  <ListItemText primary={todo.title} />
-                  <Typography
-                    sx={{
-                      minWidth: "fit-content", // чтобы ширина была по содержимому
-                      textAlign: "right",
-                    }}
-                  >
-                    {new Date(todo.date).toLocaleDateString("ru-RU")}
-                  </Typography>
-                  <Stack direction="row">
-                    <IconButton
-                      aria-label="edit"
-                      onClick={() => editTodo(todo.id, todo.title)}
-                    >
-                      <EditRoundedIcon />
-                    </IconButton>
-                    <IconButton
-                      aria-label="delete"
-                      onClick={() => deleteTodo(todo.id)}
-                    >
-                      <DeleteRoundedIcon />
-                    </IconButton>
-                  </Stack>
-                </Stack>
-              </ListItem>
-            );
-          })}
+          {filteredTodos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              toggleTodo={toggleTodo}
+              editTodo={editTodo}
+              deleteTodo={deleteTodo}
+            />
+          ))}
         </List>
       </Box>
     </Stack>

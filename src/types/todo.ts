@@ -19,3 +19,10 @@ export interface IEditTodoProps {
   setEditTitle: (value: string) => void;
   saveEditing: () => void;
 }
+
+export interface ITodoItemProps {
+  todo: ITodo;
+  deleteTodo: (id: string) => void;
+  editTodo: (id: string, title: string) => void;
+  toggleTodo: (id: string) => void;
+}
