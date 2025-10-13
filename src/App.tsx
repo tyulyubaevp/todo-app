@@ -25,7 +25,7 @@ function App() {
   }, [todoData]);
 
   const addTodo = (title: string) => {
-    const newTodo = {
+    const newTodo: ITodo = {
       id: crypto.randomUUID(),
       title: title,
       date: new Date().getTime(),

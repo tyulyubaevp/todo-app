@@ -22,8 +22,10 @@ const TodoList = ({
   editTodo,
   toggleTodo,
 }: ITodoListProps) => {
-  const [filterType, setFilterType] = useState("");
-  const [order, setOrder] = useState("to-old");
+  const [filterType, setFilterType] = useState<
+    "all" | "done" | "not done" | ""
+  >("");
+  const [order, setOrder] = useState<"to-old" | "to-new">("to-old");
 
   const filteredTodos = useMemo(() => {
     let result = [...todoData];
@@ -53,7 +55,10 @@ const TodoList = ({
     }
   }, [todoData, filterType]);
 
-  const handleFilter = (_: unknown, newFilter: string) => {
+  const handleFilter = (
+    _: unknown,
+    newFilter: "all" | "done" | "not done" | ""
+  ) => {
     if (newFilter !== null) {
       setFilterType(newFilter);
     }

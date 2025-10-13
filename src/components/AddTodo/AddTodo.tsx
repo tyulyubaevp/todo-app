@@ -29,11 +29,11 @@ const CleanTextField = styled(TextField)`
 `;
 
 const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
-  const [input, setInput] = useState("");
-  const [error, setError] = useState(false);
+  const [input, setInput] = useState<string>("");
+  const [error, setError] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e?: React.SyntheticEvent) => {
+  const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
 
     if (!input.trim()) {
@@ -55,7 +55,7 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleSubmit(e);
+      handleSubmit();
     }
   };
 
