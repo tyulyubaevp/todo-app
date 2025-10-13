@@ -30,14 +30,27 @@ const CleanTextField = styled(TextField)`
 
 const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
   const [input, setInput] = useState("");
+  const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e?: React.SyntheticEvent) => {
     e?.preventDefault();
-    if (!input.trim()) return;
+
+    if (!input.trim()) {
+      setError(true);
+      return;
+    }
     addTodo(input);
     setInput("");
+    setError(false);
     inputRef.current?.focus();
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+    if (error && e.target.value.trim()) {
+      setError(false);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -69,11 +82,12 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
             },
           }}
           variant="filled"
-          label="Добавить задачу"
+          label={error ? "Введите название задачи" : "Добавить задачу"}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
           inputRef={inputRef}
+          error={error}
         />
         <IconButton
           aria-label="add"
