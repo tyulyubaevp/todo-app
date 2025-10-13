@@ -39,13 +39,10 @@ const TodoList = ({
     }
 
     result.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-
       if (order === "to-new") {
-        return dateB.getTime() - dateA.getTime();
+        return b.date - a.date;
       } else {
-        return dateA.getTime() - dateB.getTime();
+        return a.date - b.date;
       }
     });
 
@@ -206,7 +203,7 @@ const TodoList = ({
                     />
                   </Tooltip>
                   <ListItemText
-                    primary={todo.date.split(",")[0]}
+                    primary={new Date(todo.date).toLocaleDateString('ru-RU')}
                     sx={{
                       display: "flex",
                       justifyContent: "flex-end",

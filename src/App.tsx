@@ -15,24 +15,17 @@ function App() {
   const [editTitle, setEditTitle] = useState("");
   const [currentTodoId, setCurrentTodoId] = useState<string | null>("");
 
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoData));
   }, [todoData]);
 
   const addTodo = (title: string) => {
-    const now = new Date();
 
     const newTodo = {
       id: crypto.randomUUID(),
       title: title,
-      date: now.toLocaleString("ru-RU", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }),
+      date: new Date().getTime(),
       completed: false,
     };
 

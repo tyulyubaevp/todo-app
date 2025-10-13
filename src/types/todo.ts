@@ -1,6 +1,6 @@
 export interface ITodo {
   id: string;
-  date: string;
+  date: number;
   title: string;
   completed: boolean;
 }
