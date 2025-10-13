@@ -40,6 +40,7 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
       setError(true);
       return;
     }
+
     addTodo(input);
     setInput("");
     setError(false);
@@ -56,6 +57,7 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSubmit();
+      e.preventDefault();
     }
   };
 
