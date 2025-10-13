@@ -69,7 +69,7 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
           onKeyDown={handleKeyDown}
           inputRef={inputRef}
         />
-        <IconButton aria-label="add" type="submit">
+        <IconButton aria-label="add" type="submit" sx={{ padding: "14px" }}>
           <AddCircleRoundedIcon />
         </IconButton>
       </Stack>
