@@ -50,7 +50,7 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
     <Box
       sx={{
         borderRadius: "20px",
-        background: "#fff",
+        background: (theme) => theme.palette.background.paper,
         overflow: "clip",
       }}
       component="form"
@@ -61,6 +61,12 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
         <CleanTextField
           sx={{
             width: "100%",
+            "& .MuiInputBase-input": {
+              color: (theme) => theme.palette.text.primary,
+            },
+            "& .MuiInputLabel-root": {
+              color: (theme) => theme.palette.text.secondary,
+            },
           }}
           variant="filled"
           label="Добавить задачу"
@@ -69,7 +75,11 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
           onKeyDown={handleKeyDown}
           inputRef={inputRef}
         />
-        <IconButton aria-label="add" type="submit" sx={{ padding: "14px" }}>
+        <IconButton
+          aria-label="add"
+          type="submit"
+          sx={{ padding: "14px", color: (theme) => theme.palette.primary.main }}
+        >
           <AddCircleRoundedIcon />
         </IconButton>
       </Stack>

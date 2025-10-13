@@ -19,6 +19,7 @@ import SubjectRoundedIcon from "@mui/icons-material/SubjectRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import type { ITodoListProps } from "../../types/todo";
 import { useEffect, useMemo, useState } from "react";
+import type { Theme } from "@mui/material/styles";
 
 const TodoList = ({
   todoData,
@@ -67,22 +68,24 @@ const TodoList = ({
     setOrder((prev) => (prev === "to-old" ? "to-new" : "to-old"));
   };
 
-  const toggleButtonStyles = {
+  const toggleButtonStyles = (theme: Theme) => ({
     borderRadius: "20px",
     border: "none",
-    backgroundColor: "#fff",
+    backgroundColor: theme.palette.background.paper,
     "&.Mui-selected": {
-      backgroundColor: "#42a5f5",
-      "& svg": { color: "#fff" },
+      backgroundColor: theme.palette.secondary.main,
+      "& svg": {
+        color: theme.palette.getContrastText(theme.palette.secondary.main),
+      },
     },
     "&:hover": {
-      backgroundColor: "#42a5f5",
-      "& svg": { color: "#fff" },
+      backgroundColor: theme.palette.secondary.main,
+      "& svg": {
+        color: theme.palette.getContrastText(theme.palette.secondary.main),
+      },
     },
-    "&:disabled": {
-      border: "none",
-    },
-  };
+    "&:disabled": { border: "none" },
+  });
 
   return (
     <Stack spacing={2}>
@@ -128,7 +131,7 @@ const TodoList = ({
           width: "100%",
           maxHeight: "500px",
           borderRadius: "20px",
-          backgroundColor: "#ffffff",
+          backgroundColor: (theme) => theme.palette.background.paper,
           overflowY: "auto",
         }}
       >

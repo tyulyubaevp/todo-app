@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-import { IconButton, Stack, Typography } from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
+import { CssBaseline, IconButton, Stack, Typography } from "@mui/material";
 import TodoList from "./components/TodoList/TodoList";
 import AddTodo from "./components/AddTodo/AddTodo";
 import type { ITodo } from "./types/todo";
 import EditTodo from "./components/EditTodo/EditTodo";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
+import { ThemeProvider } from "@mui/material/styles";
+import { getTheme } from "./theme/theme";
 
 function App() {
   const [todoData, setTodoData] = useState<ITodo[]>(
@@ -14,14 +16,15 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editTitle, setEditTitle] = useState("");
   const [currentTodoId, setCurrentTodoId] = useState<string | null>("");
+  const [mode, setMode] = useState<"light" | "dark">("light");
 
+  const theme = useMemo(() => getTheme(mode), [mode]);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoData));
   }, [todoData]);
 
   const addTodo = (title: string) => {
-
     const newTodo = {
       id: crypto.randomUUID(),
       title: title,
@@ -64,69 +67,68 @@ function App() {
     );
   };
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   return (
     <>
-      <Stack
-        direction={"column"}
-        spacing={5}
-        sx={{
-          maxWidth: 600,
-          margin: "0 auto",
-          paddingTop: "25px",
-        }}
-        padding="10px"
-      >
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          width="100%"
-          spacing={1}
+          direction={"column"}
+          spacing={5}
+          sx={{
+            maxWidth: 600,
+            margin: "0 auto",
+            paddingTop: "25px",
+          }}
+          padding="10px"
         >
-          <Typography
-            variant="h1"
-            component="h1"
-            color="#fff"
-            sx={{ fontSize: { xs: "44px" } }}
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            width="100%"
+            spacing={1}
           >
-            Todo App
-          </Typography>
-          <IconButton onClick={toggleDarkMode}>
-            {isDarkMode ? (
-              <DarkModeRoundedIcon
-                fontSize="large"
-                sx={{ color: "#fff", fontSize: 90 }}
-              />
-            ) : (
-              <LightModeRoundedIcon
-                fontSize="large"
-                sx={{ color: "#fff", fontSize: 90 }}
-              />
-            )}
-          </IconButton>
-        </Stack>
+            <Typography
+              variant="h1"
+              component="h1"
+              color="#fff"
+              sx={{ fontSize: { xs: "44px" } }}
+            >
+              Todo App
+            </Typography>
+            <IconButton
+              onClick={() => setMode(mode === "light" ? "dark" : "light")}
+            >
+              {mode === "light" ? (
+                <DarkModeRoundedIcon
+                  fontSize="large"
+                  sx={{ color: "#fff", fontSize: 90 }}
+                />
+              ) : (
+                <LightModeRoundedIcon
+                  fontSize="large"
+                  sx={{ color: "#fff", fontSize: 90 }}
+                />
+              )}
+            </IconButton>
+          </Stack>
 
-        <AddTodo addTodo={addTodo} />
-        <TodoList
-          todoData={todoData}
-          deleteTodo={deleteTodo}
-          editTodo={editTodo}
-          toggleTodo={toggleTodo}
+          <AddTodo addTodo={addTodo} />
+          <TodoList
+            todoData={todoData}
+            deleteTodo={deleteTodo}
+            editTodo={editTodo}
+            toggleTodo={toggleTodo}
+          />
+        </Stack>
+        <EditTodo
+          modal={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+          editTitle={editTitle}
+          setEditTitle={setEditTitle}
+          saveEditing={saveEditing}
         />
-      </Stack>
-      <EditTodo
-        modal={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
-        editTitle={editTitle}
-        setEditTitle={setEditTitle}
-        saveEditing={saveEditing}
-      />
+      </ThemeProvider>
     </>
   );
 }
