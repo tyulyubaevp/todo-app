@@ -36,6 +36,8 @@ const TodoItem = ({
               todo.completed
                 ? theme.palette.text.secondary
                 : theme.palette.text.primary,
+            wordBreak: "break-word",
+            overflowWrap: "anywhere",
           }}
         />
 
