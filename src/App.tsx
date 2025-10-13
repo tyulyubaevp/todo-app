@@ -16,9 +16,20 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editTitle, setEditTitle] = useState("");
   const [currentTodoId, setCurrentTodoId] = useState<string | null>("");
-  const [mode, setMode] = useState<"light" | "dark">("light");
+  const [mode, setMode] = useState<"light" | "dark">(() => {
+    const storedMode = localStorage.getItem("theme");
+    return storedMode === "dark" ? "dark" : "light";
+  });
 
   const theme = useMemo(() => getTheme(mode), [mode]);
+
+  const toggleMode = () => {
+    setMode((prev) => {
+      const newMode = prev === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newMode);
+      return newMode;
+    });
+  };
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoData));
@@ -96,9 +107,7 @@ function App() {
             >
               Todo App
             </Typography>
-            <IconButton
-              onClick={() => setMode(mode === "light" ? "dark" : "light")}
-            >
+            <IconButton onClick={toggleMode}>
               {mode === "dark" ? (
                 <DarkModeRoundedIcon
                   fontSize="large"
