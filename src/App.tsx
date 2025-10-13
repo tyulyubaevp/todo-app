@@ -99,7 +99,7 @@ function App() {
             <IconButton
               onClick={() => setMode(mode === "light" ? "dark" : "light")}
             >
-              {mode === "light" ? (
+              {mode === "dark" ? (
                 <DarkModeRoundedIcon
                   fontSize="large"
                   sx={{ color: "#fff", fontSize: 90 }}
