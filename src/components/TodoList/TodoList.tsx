@@ -7,7 +7,7 @@ import {
   IconButton,
   ToggleButton,
   ToggleButtonGroup,
-  Tooltip,
+  Typography,
 } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
@@ -167,48 +167,15 @@ const TodoList = ({
                       <RadioButtonUncheckedRoundedIcon />
                     )}
                   </IconButton>
-                  <Tooltip
-                    title={todo.title}
-                    placement="bottom-start"
-                    enterTouchDelay={0}
-                    leaveTouchDelay={3000}
-                    slotProps={{
-                      popper: {
-                        modifiers: [
-                          {
-                            name: "offset",
-                            options: {
-                              offset: [0, -14],
-                            },
-                          },
-                        ],
-                      },
+                  <ListItemText primary={todo.title} />
+                  <Typography
+                    sx={{
+                      minWidth: "fit-content", // чтобы ширина была по содержимому
+                      textAlign: "right",
                     }}
                   >
-                    <ListItemText
-                      primary={`${todo.title}`}
-                      sx={{
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                        maxWidth: "330px",
-                        width: "100%",
-                        flex: 10,
-                      }}
-                      slotProps={{
-                        primary: {
-                          noWrap: true,
-                        },
-                      }}
-                    />
-                  </Tooltip>
-                  <ListItemText
-                    primary={new Date(todo.date).toLocaleDateString('ru-RU')}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                    }}
-                  />
+                    {new Date(todo.date).toLocaleDateString("ru-RU")}
+                  </Typography>
                   <Stack direction="row">
                     <IconButton
                       aria-label="edit"
