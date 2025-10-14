@@ -20,6 +20,7 @@ function App() {
     const storedMode = localStorage.getItem("theme");
     return storedMode === "dark" ? "dark" : "light";
   });
+  const [editError, setEditError] = useState<boolean>(false);
 
   const theme = useMemo(() => getTheme(mode), [mode]);
 
@@ -132,7 +133,12 @@ function App() {
         </Stack>
         <EditTodo
           modal={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}
+          editError={editError}
+          closeModal={() => {
+            setIsModalOpen(false);
+            setEditError(false);
+          }}
+          setEditError={setEditError}
           editTitle={editTitle}
           setEditTitle={setEditTitle}
           saveEditing={saveEditing}

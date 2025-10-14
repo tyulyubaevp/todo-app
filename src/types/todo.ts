@@ -18,6 +18,8 @@ export interface IEditTodoProps {
   editTitle: string;
   setEditTitle: (value: string) => void;
   saveEditing: () => void;
+  editError: boolean;
+  setEditError: (value: boolean) => void;
 }
 
 export interface ITodoItemProps {

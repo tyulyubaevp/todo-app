@@ -16,9 +16,18 @@ const EditTodo = ({
   editTitle,
   setEditTitle,
   saveEditing,
+  editError,
+  setEditError,
 }: IEditTodoProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!editTitle.trim()) {
+      setEditError(true);
+      return;
+    }
+
+    setEditError(false);
     saveEditing();
   };
 
@@ -52,7 +61,7 @@ const EditTodo = ({
           component="form"
           onSubmit={handleSubmit}
         >
-          <Stack spacing={7}>
+          <Stack spacing={4}>
             <Stack
               direction="row"
               justifyContent="space-between"
@@ -83,13 +92,20 @@ const EditTodo = ({
               spacing={1}
             >
               <TextField
-                sx={{ width: "100%" }}
-                variant="filled"
+                label={editError ? "Введите текст задачи" : ""}
+                hiddenLabel={!editError}
+                sx={{
+                  width: "100%",
+                  "& fieldset": {
+                    borderRadius: "10px",
+                  },
+                }}
+                variant="outlined"
                 size="small"
-                hiddenLabel
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
                 onKeyDown={handleKeyDown}
+                error={editError}
               />
               <IconButton type="submit">
                 <SaveRoundedIcon />
