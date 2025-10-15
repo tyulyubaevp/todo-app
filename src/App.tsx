@@ -10,9 +10,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import { getTheme } from "./theme/theme";
 
 function App() {
-  const [todoData, setTodoData] = useState<ITodo[]>(
-    JSON.parse(localStorage.getItem("todos") || "[]")
-  );
+  const [todoData, setTodoData] = useState<ITodo[]>(() => {
+    const stored = localStorage.getItem("todos");
+    return stored ? JSON.parse(stored) : [];
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editTitle, setEditTitle] = useState("");
   const [currentTodoId, setCurrentTodoId] = useState<string | null>("");
