@@ -29,5 +29,5 @@ export interface ITodoItemProps {
   toggleTodo: (id: string) => void;
 }
 
-export type FilterType = "all" | "done" | "not done" | "";
-export type OrderType = "to-old" | "to-new";
+export type FilterType = 'all' | 'done' | 'not done' | '';
+export type OrderType = 'to-old' | 'to-new';

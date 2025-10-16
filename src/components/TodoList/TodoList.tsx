@@ -6,41 +6,34 @@ import {
   ListItemText,
   ToggleButton,
   ToggleButtonGroup,
-} from "@mui/material";
-import QueryBuilderRoundedIcon from "@mui/icons-material/QueryBuilderRounded";
-import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
-import SubjectRoundedIcon from "@mui/icons-material/SubjectRounded";
-import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
-import type { FilterType, ITodoListProps, OrderType } from "../../types/todo";
-import { useEffect, useState } from "react";
-import type { Theme } from "@mui/material/styles";
-import TodoItem from "../TodoItem/TodoItem";
+} from '@mui/material';
+import QueryBuilderRoundedIcon from '@mui/icons-material/QueryBuilderRounded';
+import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
+import SubjectRoundedIcon from '@mui/icons-material/SubjectRounded';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import type { FilterType, ITodoListProps, OrderType } from '../../types/todo';
+import { useEffect, useState } from 'react';
+import type { Theme } from '@mui/material/styles';
+import TodoItem from '../TodoItem/TodoItem';
 
-const TodoList = ({
-  todoData,
-  deleteTodo,
-  editTodo,
-  toggleTodo,
-}: ITodoListProps) => {
-  const [filterType, setFilterType] = useState<FilterType>("");
-  const [order, setOrder] = useState<OrderType>("to-old");
+const TodoList = ({ todoData, deleteTodo, editTodo, toggleTodo }: ITodoListProps) => {
+  const [filterType, setFilterType] = useState<FilterType>('');
+  const [order, setOrder] = useState<OrderType>('to-old');
 
   const filteredTodos =
-    filterType === "done"
+    filterType === 'done'
       ? todoData.filter((todo) => todo.completed)
-      : filterType === "not done"
+      : filterType === 'not done'
       ? todoData.filter((todo) => !todo.completed)
       : [...todoData];
 
-  filteredTodos.sort((a, b) =>
-    order === "to-new" ? b.date - a.date : a.date - b.date
-  );
+  filteredTodos.sort((a, b) => (order === 'to-new' ? b.date - a.date : a.date - b.date));
 
   useEffect(() => {
-    if (todoData.length > 0 && filterType === "") {
-      setFilterType("all");
+    if (todoData.length > 0 && filterType === '') {
+      setFilterType('all');
     } else if (todoData.length === 0) {
-      setFilterType("");
+      setFilterType('');
     }
   }, [todoData, filterType]);
 
@@ -51,26 +44,26 @@ const TodoList = ({
   };
 
   const handleOrder = () => {
-    setOrder((prev) => (prev === "to-old" ? "to-new" : "to-old"));
+    setOrder((prev) => (prev === 'to-old' ? 'to-new' : 'to-old'));
   };
 
   const toggleButtonStyles = (theme: Theme) => ({
-    borderRadius: "20px",
-    border: "none",
+    borderRadius: '20px',
+    border: 'none',
     backgroundColor: theme.palette.background.paper,
-    "&.Mui-selected": {
+    '&.Mui-selected': {
       backgroundColor: theme.palette.secondary.main,
-      "& svg": {
+      '& svg': {
         color: theme.palette.getContrastText(theme.palette.secondary.main),
       },
     },
-    "&:hover": {
+    '&:hover': {
       backgroundColor: theme.palette.secondary.main,
-      "& svg": {
+      '& svg': {
         color: theme.palette.getContrastText(theme.palette.secondary.main),
       },
     },
-    "&:disabled": { border: "none" },
+    '&:disabled': { border: 'none' },
   });
 
   return (
@@ -101,11 +94,7 @@ const TodoList = ({
             onClick={handleOrder}
             disabled={todoData.length ? false : true}
           >
-            <ToggleButton
-              sx={toggleButtonStyles}
-              value="toggleOrder"
-              selected={false}
-            >
+            <ToggleButton sx={toggleButtonStyles} value="toggleOrder" selected={false}>
               <SwapVertRoundedIcon />
             </ToggleButton>
           </ToggleButtonGroup>
@@ -113,12 +102,12 @@ const TodoList = ({
       </Box>
       <Box
         sx={{
-          maxWidth: "600px",
-          width: "100%",
-          maxHeight: "500px",
-          borderRadius: "20px",
+          maxWidth: '600px',
+          width: '100%',
+          maxHeight: '500px',
+          borderRadius: '20px',
           backgroundColor: (theme) => theme.palette.background.paper,
-          overflowY: "auto",
+          overflowY: 'auto',
         }}
       >
         <List sx={{ padding: 0 }}>
@@ -126,17 +115,17 @@ const TodoList = ({
             <ListItem>
               <ListItemText
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "32px",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '32px',
                 }}
               >
-                {filterType === "" || filterType === "all"
-                  ? "Задач нет"
-                  : filterType === "done"
-                  ? "Выполненных задач нет"
-                  : "Невыполненных задач нет"}
+                {filterType === '' || filterType === 'all'
+                  ? 'Задач нет'
+                  : filterType === 'done'
+                  ? 'Выполненных задач нет'
+                  : 'Невыполненных задач нет'}
               </ListItemText>
             </ListItem>
           )}

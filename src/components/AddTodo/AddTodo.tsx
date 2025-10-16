@@ -1,8 +1,8 @@
-import { Box, IconButton, TextField } from "@mui/material";
-import styled from "styled-components";
-import { Stack } from "@mui/system";
-import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-import { useState, useRef } from "react";
+import { Box, IconButton, TextField } from '@mui/material';
+import styled from 'styled-components';
+import { Stack } from '@mui/system';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import { useState, useRef } from 'react';
 
 const CleanTextField = styled(TextField)`
   & .MuiInputBase-root {
@@ -29,7 +29,7 @@ const CleanTextField = styled(TextField)`
 `;
 
 const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
-  const [input, setInput] = useState<string>("");
+  const [input, setInput] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,7 +42,7 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
     }
 
     addTodo(input);
-    setInput("");
+    setInput('');
     setError(false);
     inputRef.current?.focus();
   };
@@ -55,7 +55,7 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleSubmit();
       e.preventDefault();
     }
@@ -64,27 +64,27 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
   return (
     <Box
       sx={{
-        borderRadius: "20px",
+        borderRadius: '20px',
         background: (theme) => theme.palette.background.paper,
-        overflow: "clip",
+        overflow: 'clip',
       }}
       component="form"
       onSubmit={handleSubmit}
       autoComplete="off"
     >
-      <Stack direction={"row"} spacing={0} alignItems={"center"}>
+      <Stack direction={'row'} spacing={0} alignItems={'center'}>
         <CleanTextField
           sx={{
-            width: "100%",
-            "& .MuiInputBase-input": {
+            width: '100%',
+            '& .MuiInputBase-input': {
               color: (theme) => theme.palette.text.primary,
             },
-            "& .MuiInputLabel-root": {
+            '& .MuiInputLabel-root': {
               color: (theme) => theme.palette.text.secondary,
             },
           }}
           variant="filled"
-          label={error ? "Введите название задачи" : "Добавить задачу"}
+          label={error ? 'Введите название задачи' : 'Добавить задачу'}
           value={input}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
@@ -94,7 +94,7 @@ const AddTodo = ({ addTodo }: { addTodo: (title: string) => void }) => {
         <IconButton
           aria-label="add"
           type="submit"
-          sx={{ padding: "14px", color: (theme) => theme.palette.primary.main }}
+          sx={{ padding: '14px', color: (theme) => theme.palette.primary.main }}
         >
           <AddCircleRoundedIcon />
         </IconButton>
