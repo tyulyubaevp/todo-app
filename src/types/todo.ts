@@ -28,3 +28,5 @@ export interface ITodoItemProps {
   editTodo: (id: string, title: string) => void;
   toggleTodo: (id: string) => void;
 }
+
+export type FilterType = "all" | "done" | "not done" | "";
