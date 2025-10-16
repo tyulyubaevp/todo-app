@@ -12,7 +12,7 @@ import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import SubjectRoundedIcon from "@mui/icons-material/SubjectRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import type { ITodoListProps } from "../../types/todo";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Theme } from "@mui/material/styles";
 import TodoItem from "../TodoItem/TodoItem";
 
@@ -27,7 +27,7 @@ const TodoList = ({
   >("");
   const [order, setOrder] = useState<"to-old" | "to-new">("to-old");
 
-  const filteredTodos = useMemo(() => {
+  const filteredTodos = () => {
     let result = [...todoData];
 
     if (filterType === "done") {
@@ -45,7 +45,7 @@ const TodoList = ({
     });
 
     return result;
-  }, [todoData, filterType, order]);
+  };
 
   useEffect(() => {
     if (todoData.length > 0 && filterType === "") {
@@ -136,7 +136,7 @@ const TodoList = ({
         }}
       >
         <List sx={{ padding: 0 }}>
-          {!filteredTodos.length && (
+          {!filteredTodos().length && (
             <ListItem>
               <ListItemText
                 sx={{
@@ -154,7 +154,7 @@ const TodoList = ({
               </ListItemText>
             </ListItem>
           )}
-          {filteredTodos.map((todo) => (
+          {filteredTodos().map((todo) => (
             <TodoItem
               key={todo.id}
               todo={todo}

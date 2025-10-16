@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { CssBaseline, IconButton, Stack, Typography } from "@mui/material";
 import TodoList from "./components/TodoList/TodoList";
 import AddTodo from "./components/AddTodo/AddTodo";
@@ -23,7 +23,7 @@ function App() {
   });
   const [editError, setEditError] = useState<boolean>(false);
 
-  const theme = useMemo(() => getTheme(mode), [mode]);
+  const theme = getTheme(mode);
 
   const toggleMode = () => {
     setMode((prev) => {
