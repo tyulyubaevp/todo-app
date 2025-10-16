@@ -1,80 +1,32 @@
-import { useEffect, useState } from 'react';
 import { CssBaseline, IconButton, Stack, Typography } from '@mui/material';
 import TodoList from './components/TodoList/TodoList';
 import AddTodo from './components/AddTodo/AddTodo';
-import type { ITodo } from './types/todo';
 import EditTodo from './components/EditTodo/EditTodo';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import { ThemeProvider } from '@mui/material/styles';
 import { getTheme } from './theme/theme';
+import useTodos from './hooks/useTodos';
+import useThemeMode from './hooks/useThemeMode';
+import useEditTodo from './hooks/useEditTodo';
 
 function App() {
-  const [todoData, setTodoData] = useState<ITodo[]>(() => {
-    const stored = localStorage.getItem('todos');
-    return stored ? JSON.parse(stored) : [];
+  const { addTodo, deleteTodo, toggleTodo, todoData, setTodoData } = useTodos();
+  const {
+    isModalOpen,
+    setIsModalOpen,
+    editError,
+    setEditError,
+    editTodo,
+    saveEditing,
+    editTitle,
+    setEditTitle,
+  } = useEditTodo({
+    setTodoData,
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editTitle, setEditTitle] = useState('');
-  const [currentTodoId, setCurrentTodoId] = useState<string | null>('');
-  const [mode, setMode] = useState<'light' | 'dark'>(() => {
-    const storedMode = localStorage.getItem('theme');
-    return storedMode === 'dark' ? 'dark' : 'light';
-  });
-  const [editError, setEditError] = useState<boolean>(false);
+  const { mode, toggleMode } = useThemeMode();
 
   const theme = getTheme(mode);
-
-  const toggleMode = () => {
-    setMode((prev) => {
-      const newMode = prev === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', newMode);
-      return newMode;
-    });
-  };
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todoData));
-  }, [todoData]);
-
-  const addTodo = (title: string) => {
-    const newTodo: ITodo = {
-      id: crypto.randomUUID(),
-      title: title,
-      date: new Date().getTime(),
-      completed: false,
-    };
-
-    setTodoData((prev: ITodo[]) => [...prev, newTodo]);
-  };
-
-  const deleteTodo = (id: string) => {
-    return setTodoData((prev) => prev.filter((todo) => todo.id != id));
-  };
-
-  const editTodo = (id: string, title: string) => {
-    setCurrentTodoId(id);
-    setEditTitle(title);
-    setIsModalOpen(true);
-  };
-
-  const saveEditing = () => {
-    if (!currentTodoId) return;
-
-    setTodoData((prev) =>
-      prev.map((todo) => (todo.id === currentTodoId ? { ...todo, title: editTitle } : todo))
-    );
-
-    setIsModalOpen(false);
-    setCurrentTodoId(null);
-    setEditTitle('');
-  };
-
-  const toggleTodo = (id: string) => {
-    setTodoData((prev) =>
-      prev.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo))
-    );
-  };
 
   return (
     <>
