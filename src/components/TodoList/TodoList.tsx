@@ -30,11 +30,7 @@ const TodoList = ({ todoData, deleteTodo, editTodo, toggleTodo }: ITodoListProps
   filteredTodos.sort((a, b) => (order === 'to-new' ? b.date - a.date : a.date - b.date));
 
   useEffect(() => {
-    if (todoData.length > 0 && filterType === '') {
-      setFilterType('all');
-    } else if (todoData.length === 0) {
-      setFilterType('');
-    }
+    setFilterType(todoData.length === 0 ? '' : filterType || 'all');
   }, [todoData, filterType]);
 
   const handleFilter = (_: unknown, newFilter: FilterType) => {
