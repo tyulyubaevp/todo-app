@@ -11,7 +11,7 @@ import QueryBuilderRoundedIcon from "@mui/icons-material/QueryBuilderRounded";
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import SubjectRoundedIcon from "@mui/icons-material/SubjectRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
-import type { FilterType, ITodoListProps } from "../../types/todo";
+import type { FilterType, ITodoListProps, OrderType } from "../../types/todo";
 import { useEffect, useState } from "react";
 import type { Theme } from "@mui/material/styles";
 import TodoItem from "../TodoItem/TodoItem";
@@ -23,7 +23,7 @@ const TodoList = ({
   toggleTodo,
 }: ITodoListProps) => {
   const [filterType, setFilterType] = useState<FilterType>("");
-  const [order, setOrder] = useState<"to-old" | "to-new">("to-old");
+  const [order, setOrder] = useState<OrderType>("to-old");
 
   const filteredTodos =
     filterType === "done"

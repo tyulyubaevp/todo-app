@@ -30,3 +30,4 @@ export interface ITodoItemProps {
 }
 
 export type FilterType = "all" | "done" | "not done" | "";
+export type OrderType = "to-old" | "to-new";
