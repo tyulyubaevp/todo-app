@@ -27,25 +27,16 @@ const TodoList = ({
   >("");
   const [order, setOrder] = useState<"to-old" | "to-new">("to-old");
 
-  const filteredTodos = () => {
-    let result = [...todoData];
+  const filteredTodos =
+    filterType === "done"
+      ? todoData.filter((todo) => todo.completed)
+      : filterType === "not done"
+      ? todoData.filter((todo) => !todo.completed)
+      : [...todoData];
 
-    if (filterType === "done") {
-      result = result.filter((todo) => todo.completed);
-    } else if (filterType === "not done") {
-      result = result.filter((todo) => !todo.completed);
-    }
-
-    result.sort((a, b) => {
-      if (order === "to-new") {
-        return b.date - a.date;
-      } else {
-        return a.date - b.date;
-      }
-    });
-
-    return result;
-  };
+  filteredTodos.sort((a, b) =>
+    order === "to-new" ? b.date - a.date : a.date - b.date
+  );
 
   useEffect(() => {
     if (todoData.length > 0 && filterType === "") {
@@ -136,7 +127,7 @@ const TodoList = ({
         }}
       >
         <List sx={{ padding: 0 }}>
-          {!filteredTodos().length && (
+          {!filteredTodos.length && (
             <ListItem>
               <ListItemText
                 sx={{
@@ -154,7 +145,7 @@ const TodoList = ({
               </ListItemText>
             </ListItem>
           )}
-          {filteredTodos().map((todo) => (
+          {filteredTodos.map((todo) => (
             <TodoItem
               key={todo.id}
               todo={todo}
